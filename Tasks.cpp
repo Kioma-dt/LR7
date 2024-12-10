@@ -42,3 +42,55 @@ void Task_2(){
     sum = DirectToAdditional(sum);
     std::cout << DeleteZeroes(sum) << '\n';
 }
+
+void Task_3(){
+    std::cout << "Введите основание системы:\n";
+    int system;
+    std::cin >> system;
+    std::cout << "Введите два числа в " << system << "-ой системе:\n";
+    std::string number_1, number_2;
+    std::cin >> number_1 >> number_2;
+
+    bool negative_1 = false, negative_2 = false;
+    if (number_1[0] == '-'){
+        negative_1 = true;
+        number_1.erase(0, 1);
+    }
+    if (number_2[0] == '-'){
+        negative_2 = true;
+        number_2.erase(0, 1);
+    }
+
+    std::string sum, diference;
+    std::cout << "Сумма двух чисел:\n";
+    if (negative_1 && negative_2){
+        sum = SumNumbers(number_1, number_2, system);
+        sum = AddMinus(sum);
+    }
+    else if (negative_1){
+        sum = SubstractNumber(number_2, number_1, system);
+    }
+    else if (negative_2){
+        sum = SubstractNumber(number_1, number_2, system);
+    }
+    else {
+        sum = SumNumbers(number_1, number_2, system);
+    }
+    std::cout << sum << '\n';
+
+    std::cout << "Разность чисел:\n";
+    if (negative_1 && negative_2){
+        diference = SubstractNumber(number_2, number_1, system);
+    }
+    else if (negative_1){
+        diference = SumNumbers(number_1, number_2, system);
+        diference = AddMinus(diference);
+    }
+    else if (negative_2){
+        diference = SumNumbers(number_1, number_2, system);
+    }
+    else {
+        diference = SubstractNumber(number_1, number_2, system);
+    }
+    std::cout << diference << '\n';
+}

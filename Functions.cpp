@@ -32,25 +32,47 @@ std::string DeleteZeroes(std::string number){
     return number;
 }
 
-std::string GreaterNumber(std::string number_1, std::string number_2){
+std::string AddMinus(std::string number){
+    if (number[0] == '-'){
+        number.erase(0, 1);
+        return number;
+    }
+
+    return '-' + number;
+}
+
+bool Greater(std::string number_1, std::string number_2){
     if (number_1.size() > number_2.size()){
-        return number_1;
+        return true;
     }
     else if (number_1.size() < number_2.size()){
-        return number_2;
+        return false;
     }
     else{
         for (int i = 0; i < number_1.size(); i++){
             if (number_1[i] > number_2[i]){
-                return number_1;
+                return true;
             }
             else if (number_1[i] < number_2[i]){
-                return number_2;
+                return false;
             }
         }
     }
 
-    return number_1;
+    return false;
+}
+
+int CharToInt(char c){
+    if (c >= 'A'){
+        return (int)c - 'A' + 10;
+    }
+    return (int)c - '0';
+}
+char IntToChar(int d){
+    if (d >= 10){
+        return (char)d - 10 + 'A';
+    }
+    return (char)d + '0';
 }
 
 std::string SumNumbers(std::string number_1, std::string number_2, int system){
@@ -60,13 +82,13 @@ std::string SumNumbers(std::string number_1, std::string number_2, int system){
     number_2 = AddZeroes(number_2, size);
 
     for (int i = size - 1; i >= 0;i--){
-        temp_sum = number_1[i] - 48 + number_2[i] - 48 + carry;
+        temp_sum = CharToInt(number_1[i]) + CharToInt(number_2[i]) + carry;
         carry = 0;
         if (temp_sum >= system) {
             temp_sum -= system;
             carry++;
         }
-        sum.push_back((char) temp_sum + 48);
+        sum.push_back(IntToChar(temp_sum));
         temp_sum = 0;
     }
 
@@ -77,21 +99,31 @@ std::string SumNumbers(std::string number_1, std::string number_2, int system){
     return MirrorNumber(sum);
 }
 
-std::string SubstractNumber(std::string number_1, std::string number_2, int system){
+std::string SubstractNumber(std::string number_1, std::string number_2, int system) {
+    bool negative = false;
+    if (Greater(number_2,number_1)){
+        negative = true;
+        std::swap(number_1, number_2);
+    }
+
     std::string difference;
     int carry = 0, size = number_1.size(), temp_difference = 0;
     number_1 = AddZeroes(number_1, size);
     number_2 = AddZeroes(number_2, size);
 
     for (int i = size - 1; i >= 0; i--){
-        temp_difference = (number_1[i] - 48) - (number_2[i] - 48) - carry;
+        temp_difference = CharToInt(number_1[i]) - CharToInt(number_2[i]) - carry;
         carry = 0;
         if (temp_difference < 0){
             carry++;
             temp_difference += system;
         }
-        difference.push_back((char)temp_difference + 48);
+        difference.push_back(IntToChar(temp_difference));
         temp_difference = 0;
+    }
+
+    if (negative){
+        difference.push_back('-');
     }
 
     return DeleteZeroes(MirrorNumber(difference));
