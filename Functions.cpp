@@ -197,6 +197,42 @@ std::string DecToDirect(std::string number, bool negative){
     return MirrorNumber(direct);
 }
 
+long long Multiplying(long long number_1, int number_2){
+    long long pow = 0;
+    long long result = 0;
+    while ((1 << (pow + 1)) < number_2){
+        pow++;
+    }
+    
+    result += (number_1 << pow);
+    for (int i = (1 << pow) ; i < number_2; i++){
+        result += number_1;
+    }
+
+    return result;
+}
+
+bool checkDivisible(long long number, int divider, int system, int findResidue, int coefficient){
+    long long prev_number;
+    long long residue;
+    do{
+        prev_number = number;
+        number = number >> system;
+        residue = prev_number & findResidue;
+        number += Multiplying(residue, coefficient);
+    } while (prev_number != number && number > divider);
+
+    int check = divider;
+    while (check < number){
+        check += divider;
+    }
+
+    if (check == number){
+        return true;
+    }
+    return false;
+}
+
 void repeat(){
     std::cout << "Repeat solution?(y/n) ";
 	char answer;

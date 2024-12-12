@@ -20,6 +20,9 @@ int main() {
     case 3:
         Task_3();
         break;
+    case 4:
+        Task_4();
+        break;
     }
 
     repeat();

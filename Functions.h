@@ -14,4 +14,6 @@ std::string DivideByTwo(std::string);
 std::string DirectToReverse(std::string);
 std::string DirectToAdditional(std::string);
 std::string DecToDirect(std::string, bool);
+long long Multiplying(long long, int);
+bool isDivisible(long long, int, int, int, int);
 void repeat();
