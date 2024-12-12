@@ -94,3 +94,40 @@ void Task_3(){
     }
     std::cout << diference << '\n';
 }
+
+void Task_4(){
+    long long number;
+    std::cout << "Введите число:\n";
+    std::cin >> number;
+    std::cout << "Проверить делимость на (1 - 3, 2 - 37, 3 - 89):\n";
+    int input;
+    std::cin >> input;
+    switch (input){
+    case 1:
+        if (checkDivisible(number, 3, 1, 1, 2)){
+            std::cout << number << " делится на 3\n";
+        }
+        else {
+            std::cout << number << " не делится на 3\n";
+        }
+        break;
+    case 2:
+        if (checkDivisible(number, 37, 4, 15, 7)){
+            std::cout << number << " делится на 37\n";
+        }
+        else {
+            std::cout << number << " не делится на 37\n";
+        }
+        break;
+    case 3:
+        if (checkDivisible(number, 89, 4, 15, 39)){
+            std::cout << number << " делится на 89\n";
+        }
+        else {
+            std::cout << number << " не делится на 89\n";
+        }
+        break;
+    default:
+        std::cout << "Неверный номер!\n";
+    }
+}
