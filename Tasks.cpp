@@ -6,7 +6,7 @@
 void Task_1(){
     std::string number;
     std::cout << "Введите число в прямом коде:\n";
-    std::cin >> number;
+    number = CheckSystem(2);
 
     number = DirectToReverse(number);
 
@@ -17,7 +17,8 @@ void Task_2(){
     std::cout << "Введите два числа в естественной форме:\n";
     std::string number_1, number_2;
     bool negative_1 = false, negative_2 = false;
-    std::cin >> number_1 >> number_2;
+    number_1 = CheckSystem(10);
+    number_2 = CheckSystem(10);
 
     if (number_1[0] == '-'){
         negative_1 = true;
@@ -45,11 +46,12 @@ void Task_2(){
 
 void Task_3(){
     std::cout << "Введите основание системы:\n";
-    int system;
-    std::cin >> system;
+    unsigned long long system;
+    system = CheckUnsigned();
     std::cout << "Введите два числа в " << system << "-ой системе:\n";
     std::string number_1, number_2;
-    std::cin >> number_1 >> number_2;
+    number_1 = CheckSystem(system);
+    number_2 = CheckSystem(system);
 
     bool negative_1 = false, negative_2 = false;
     if (number_1[0] == '-'){
@@ -76,7 +78,7 @@ void Task_3(){
     else {
         sum = SumNumbers(number_1, number_2, system);
     }
-    std::cout << sum << '\n';
+    std::cout << number_1 << " + " << number_2 << " = " << sum << '\n';
 
     std::cout << "Разность чисел:\n";
     if (negative_1 && negative_2){
@@ -92,42 +94,65 @@ void Task_3(){
     else {
         diference = SubstractNumber(number_1, number_2, system);
     }
-    std::cout << diference << '\n';
+    std::cout << number_1 << " - " << number_2 << " = " << diference << '\n';
 }
 
 void Task_4(){
-    long long number;
+    unsigned long long number;
     std::cout << "Введите число:\n";
-    std::cin >> number;
-    std::cout << "Проверить делимость на (1 - 3, 2 - 37, 3 - 89):\n";
-    int input;
-    std::cin >> input;
-    switch (input){
-    case 1:
-        if (checkDivisible(number, 3, 1, 1, 2)){
-            std::cout << number << " делится на 3\n";
+    number = CheckUnsigned();
+    bool cont = true;
+    while (cont){
+        std::cout << "Проверить делимость на (1 - 3, 2 - 37, 3 - 89, 4 - выйти):\n";
+        int input;
+        std::cin >> input;
+        switch (input){
+        case 1:
+            if (checkDivisible(number, 3, 1, 1, 2)){
+                std::cout << number << " делится на 3\n";
+            }
+            else {
+                std::cout << number << " не делится на 3\n";
+            }
+            break;
+        case 2:
+            if (checkDivisible(number, 37, 4, 15, 7)){
+                std::cout << number << " делится на 37\n";
+            }
+            else {
+                std::cout << number << " не делится на 37\n";
+            }
+            break;
+        case 3:
+            if (checkDivisible(number, 89, 2, 3, 67)){
+                std::cout << number << " делится на 89\n";
+            }
+            else {
+                std::cout << number << " не делится на 89\n";
+            }
+            break;
+        case 4:
+            cont = false;
+            break;
+        default:
+            std::cout << "Неверный номер!\n";
         }
-        else {
-            std::cout << number << " не делится на 3\n";
-        }
-        break;
-    case 2:
-        if (checkDivisible(number, 37, 4, 15, 7)){
-            std::cout << number << " делится на 37\n";
-        }
-        else {
-            std::cout << number << " не делится на 37\n";
-        }
-        break;
-    case 3:
-        if (checkDivisible(number, 89, 4, 15, 39)){
-            std::cout << number << " делится на 89\n";
-        }
-        else {
-            std::cout << number << " не делится на 89\n";
-        }
-        break;
-    default:
-        std::cout << "Неверный номер!\n";
+    }
+}
+
+void Task_5(){
+    std::cout << "Загадайте одну бочку, в которой находится яд(номера бочек от 1 до 240)\n";
+    std::string barrel;
+
+    for (int i = 1; i <= 5; i++){
+        barrel.push_back(EnterSlavesDay(i));
+    }
+
+    if (barrel == "00000" || barrel == "22221" || barrel == "22222"){
+        std::cout << "Такая ситуация невозможна!\n";
+    }
+    else {
+        int poison = FindBarrel(barrel);
+        std::cout << "Отравлена бочка под номером " << poison << '\n';
     }
 }
