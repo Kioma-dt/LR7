@@ -3,22 +3,27 @@
 #include "Functions.h"
 
 
-void Task_1(){
+void Task_1() {
+    std::cout << "Перевести чилсло из прямого кода в обратный\n";
+    std::cout << "Решение:\n";
     std::string number;
     std::cout << "Введите число в прямом коде:\n";
-    number = CheckSystem(2);
+    number = CheckSystem(2, 1);
 
     number = DirectToReverse(number);
 
     std::cout << "Число в обратном коде:\n" << number << '\n';
 }
 
-void Task_2(){
+void Task_2() {
+    std::cout << "Найти сумму двоичных чисел, заданных в естесвенной форме\n";
+    std::cout << "Сложение выполнить в дополнительном коде. Ответ вывети в прямом коде\n";
+    std::cout << "Решение\n";
     std::cout << "Введите два числа в естественной форме:\n";
     std::string number_1, number_2;
     bool negative_1 = false, negative_2 = false;
-    number_1 = CheckSystem(10);
-    number_2 = CheckSystem(10);
+    number_1 = CheckSystem(10, 0);
+    number_2 = CheckSystem(10, 0);
 
     if (number_1[0] == '-'){
         negative_1 = true;
@@ -41,17 +46,19 @@ void Task_2(){
         sum.erase(0, 1);
     }
     sum = DirectToAdditional(sum);
-    std::cout << DeleteZeroes(sum) << '\n';
+    std::cout << "Сумма чисел в прямом коде: " << sum << '\n';
 }
 
-void Task_3(){
+void Task_3() {
+    std::cout << "Осуществить сложение и вычитание чисел в заданной системе счисления\n";
+    std::cout << "Решение:\n";
     std::cout << "Введите основание системы:\n";
     unsigned long long system;
     system = CheckUnsigned();
     std::cout << "Введите два числа в " << system << "-ой системе:\n";
     std::string number_1, number_2;
-    number_1 = CheckSystem(system);
-    number_2 = CheckSystem(system);
+    number_1 = CheckSystem(system, 0);
+    number_2 = CheckSystem(system, 0);
 
     bool negative_1 = false, negative_2 = false;
     if (number_1[0] == '-'){
@@ -70,10 +77,10 @@ void Task_3(){
         sum = AddMinus(sum);
     }
     else if (negative_1){
-        sum = SubstractNumber(number_2, number_1, system);
+        sum = SubtractNumbers(number_2, number_1, system);
     }
     else if (negative_2){
-        sum = SubstractNumber(number_1, number_2, system);
+        sum = SubtractNumbers(number_1, number_2, system);
     }
     else {
         sum = SumNumbers(number_1, number_2, system);
@@ -82,7 +89,7 @@ void Task_3(){
 
     std::cout << "Разность чисел:\n";
     if (negative_1 && negative_2){
-        diference = SubstractNumber(number_2, number_1, system);
+        diference = SubtractNumbers(number_2, number_1, system);
     }
     else if (negative_1){
         diference = SumNumbers(number_1, number_2, system);
@@ -92,12 +99,14 @@ void Task_3(){
         diference = SumNumbers(number_1, number_2, system);
     }
     else {
-        diference = SubstractNumber(number_1, number_2, system);
+        diference = SubtractNumbers(number_1, number_2, system);
     }
     std::cout << number_1 << " - " << number_2 << " = " << diference << '\n';
 }
 
-void Task_4(){
+void Task_4() {
+    std::cout << "Проверить делится ли число на 3, 37 и 89\n";
+    std::cout << "Решение:\n";
     unsigned long long number;
     std::cout << "Введите число:\n";
     number = CheckUnsigned();
@@ -108,7 +117,7 @@ void Task_4(){
         std::cin >> input;
         switch (input){
         case 1:
-            if (checkDivisible(number, 3, 1, 1, 2)){
+            if (checkDivisible(number, 3, 1, 2)){
                 std::cout << number << " делится на 3\n";
             }
             else {
@@ -116,7 +125,7 @@ void Task_4(){
             }
             break;
         case 2:
-            if (checkDivisible(number, 37, 4, 15, 7)){
+            if (checkDivisible(number, 37, 4, 7)){
                 std::cout << number << " делится на 37\n";
             }
             else {
@@ -124,7 +133,7 @@ void Task_4(){
             }
             break;
         case 3:
-            if (checkDivisible(number, 89, 2, 3, 67)){
+            if (checkDivisible(number, 89, 2, 67)){
                 std::cout << number << " делится на 89\n";
             }
             else {
@@ -140,7 +149,11 @@ void Task_4(){
     }
 }
 
-void Task_5(){
+void Task_5() {
+    std::cout << "Одна из 240 бочек отравлена, необходимо определить какая\n";
+    std::cout << "Яд проявляет себя через 24 часа, после принятия. Бочку необходимо найти за 48 часов\n";
+    std::cout << "Есть 5 рабов, которыми можно пожертвовать\n";
+    std::cout << "Решение:\n";
     std::cout << "Загадайте одну бочку, в которой находится яд(номера бочек от 1 до 240)\n";
     std::string barrel;
 

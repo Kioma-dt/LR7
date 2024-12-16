@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Tasks.h"
+#include "Functions.h"
 
 int main() {
     std::cout << "Выполнил Авраменко Роман Александрович\n";
@@ -30,7 +31,6 @@ int main() {
         break;
     default:
         std::cout << "Неверный символ!\n";
-        std::cin.ignore(10000, '\n');
     }
 
     repeat();
